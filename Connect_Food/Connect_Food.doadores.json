@@ -1,0 +1,12 @@
+[{
+  "_id": {
+    "$oid": "6634756e738d8d50297ea24d"
+  },
+  "nome": "Jose",
+  "cpf": "123.456",
+  "alimento": "batata",
+  "quantidade": 2,
+  "validade": {
+    "$date": "2024-06-12T03:00:00.000Z"
+  }
+}]
