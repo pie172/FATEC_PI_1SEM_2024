@@ -31,4 +31,4 @@ class DBConnectionHandler:
 
     def get_db_client(self):
         return self.__client
-# Create your models here.
+

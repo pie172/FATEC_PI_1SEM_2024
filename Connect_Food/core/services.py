@@ -2,7 +2,7 @@ from pymongo import MongoClient
 
 connection_string = "mongodb://localhost:27017"
 client = MongoClient(connection_string)
-db_connection = client["Connect_Food"]
+db_connection = client["connect_food"]
 
 print(db_connection)
 print()
@@ -13,4 +13,5 @@ print()
 search_filter = { "nome": "Jose" }
 response = collection.find(search_filter)
 
-for registry in response: print(registry)
+for registry in response: 
+    print(registry)
