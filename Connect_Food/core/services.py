@@ -1,17 +1,32 @@
+from django.db import models
 from pymongo import MongoClient
+import services
 
-connection_string = "mongodb://localhost:27017"
-client = MongoClient(connection_string)
-db_connection = client["connect_food"]
+mongo_db_infos = {
+    "HOST": "localhost",
+    "PORT": "27017",
+    "USERNAME": "admin",
+    "PASSWORD": "password",
+}
 
-print(db_connection)
-print()
-collection = db_connection.get_collection("doadores")
+class DBConnectionHandler:
+    def __init__(self) -> None:
+        self.__connection_string = 'mongodb://{}:{}@{}:{}/?authSource=admin'.format(
+            mongo_db_infos["USERNAME"],
+            mongo_db_infos["PASSWORD"],
+            mongo_db_infos["HOST"],
+            mongo_db_infos["PORT"]
+        )
+        self.__database_name = mongo_db_infos["DB_NAME"]
+        self.__client = None
+        self.__db_connection = None
 
-print(collection)
-print()
-search_filter = { "nome": "Jose" }
-response = collection.find(search_filter)
+    def connect_to_db(self):
+        self.__client = MongoClient(self.__connection_string)
+        self.__db_connection = self.__client[self.__database_name]
 
-for registry in response: 
-    print(registry)
+    def get_db_connection(self):
+        return self.__db_connection
+
+    def get_db_client(self):
+        return self.__client
