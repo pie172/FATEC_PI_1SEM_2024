@@ -1,34 +1,43 @@
-from django.db import models
 from pymongo import MongoClient
-import services
+import datetime
+import pprint
 
-mongo_db_infos = {
-    "HOST": "localhost",
-    "PORT": "27017",
-    "USERNAME": "admin",
-    "PASSWORD": "password",
-    "DB_NAME": "meuBanco"
+# Conectando ao MongoDB
+connection_string = "mongodb://localhost:27017"
+client = MongoClient(connection_string)
+db_connection = client["Connect_Food"] 
+
+print(db_connection)
+print()
+collection = db_connection.get_collection("doadores")
+
+print(collection)
+print()
+response = collection.find()
+
+for registry in response: 
+    print(registry)
+
+
+nome = input("Em qual nome será cadastrado? \n")
+cpf = input("CPF: \n")
+cnpj= input("CNPJ: \n")
+categoria= input("Categoria: \n")
+alimento = input("Alimento: \n")
+quantidade = input("Quantidade: \n")
+
+
+post = {
+  "nome": nome,
+  "cpf": cpf,
+  "cnpj": cnpj,
+  "categoria": categoria,
+  "alimento": alimento,
+  "quantidade": quantidade,
+  "data": datetime.datetime.now()  
 }
 
-class DBConnectionHandler:
-    def __init__(self) -> None:
-        self.__connection_string = 'mongodb://{}:{}@{}:{}/?authSource=admin'.format(
-            mongo_db_infos["USERNAME"],
-            mongo_db_infos["PASSWORD"],
-            mongo_db_infos["HOST"],
-            mongo_db_infos["PORT"]
-        )
-        self.__database_name = mongo_db_infos["DB_NAME"]
-        self.__client = None
-        self.__db_connection = None
+collection.insert_one(post)
 
-    def connect_to_db(self):
-        self.__client = MongoClient(self.__connection_string)
-        self.__db_connection = self.__client[self.__database_name]
 
-    def get_db_connection(self):
-        return self.__db_connection
-
-    def get_db_client(self):
-        return self.__client
-
+collection = db_connection.get_collection("doadores")
