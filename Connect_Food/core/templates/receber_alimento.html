@@ -1,0 +1,14 @@
+<form method="post">
+    {% csrf_token %}
+    <label for="alimento_id">ID do Alimento:</label>
+    <input type="number" id="alimento_id" name="alimento_id" required>
+    <label for="nome_recebedor">Nome do Recebedor:</label>
+    <input type="text" id="nome_recebedor" name="nome_recebedor" required>
+    <label for="quantidade_retirou">Quantidade Retirada:</label>
+    <input type="number" id="quantidade_retirou" name="quantidade_retirou" required>
+    <label for="cnpj_recebedor">CNPJ do Recebedor:</label>
+    <input type="text" id="cnpj_recebedor" name="cnpj_recebedor" required>
+    <label for="email_recebedor">Email do Recebedor:</label>
+    <input type="email" id="email_recebedor" name="email_recebedor" required>
+    <button type="submit">Receber Alimento</button>
+</form>

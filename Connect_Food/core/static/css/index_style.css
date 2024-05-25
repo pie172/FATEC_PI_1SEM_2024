@@ -38,7 +38,7 @@ body {
 }
 
 .intro button {
-  background-color: #61e70e;
+  background-color: #8bc864;
   color: #000;
   padding: 10px 25px;
   border: 1px;
@@ -47,6 +47,17 @@ body {
   font-weight: bold;
   cursor: pointer;
   box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.4)
+}
+
+.intro button a {
+  color: #ffffff;
+  font-weight: 25px;
+  font-size: 14px;
+}
+
+.intro button a:hover {
+  color: #1aeb0f;
+  text-decoration: none;
 }
 
 .achievements {

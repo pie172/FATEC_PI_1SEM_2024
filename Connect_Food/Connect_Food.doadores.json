@@ -3,47 +3,16 @@
   "nome": "Jose",
   "cpf": "123.456",
   "cnpj": "151515151",
+  "email": "jose@gmail.com",
+  "alimento_id": 3,
   "categoria": "Legumes",
   "alimento": "batata",
   "quantidade": 2,
   "validade": {
     "$date": "2024-06-12T03:00:00.000Z"
-  }
-},
-{
-  "_id": 2,
-  "nome": "Miguel",
-  "cpf": "545454",
-  "cnpj": "5454554",
-  "categoria": "Fruta",
-  "alimento": "Maçã",
-  "quantidade": 15,
-  "validade": {
-    "$date": "2024-06-19T03:00:00.000Z"
-  }
-},
-{
-  "_id": 3,
-  "nome": "Samuel",
-  "cpf": "5454545",
-  "cnpj": "15545451",
-  "categoria": "Legumes",
-  "alimento": "Cenoura",
-  "quantidade": 9,
-  "validade": {
-    "$date": "2024-06-07T03:00:00.000Z"
-  }
-},
-{
-  "_id": 4,
-  "nome": "Pietra",
-  "cpf": "5454545445",
-  "cnpj": "45454545",
-  "categoria": "Não Perecivel",
-  "alimento": "Arroz",
-  "quantidade": 4,
-  "validade": {
-    "$date": "2024-08-16T03:00:00.000Z"
-  }
-}
-]
+  },
+  "nome_recebedor": null,
+  "quantidade_retirou": null, 
+  "cnpj_recebedor": null , 
+  "email_recebedor": null
+}]
