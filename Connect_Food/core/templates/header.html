@@ -1,0 +1,51 @@
+<style type="text/css">
+  nav.navbar-black {
+    padding: 15px 0;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: white;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: #19c9a9
+}
+
+.navbar-light .navbar-toggler {
+    width: 1px;
+    background-color: black;
+    margin: 12px 15px;
+}
+
+.btn-color {
+    background-color: #8bc864;
+}
+</style>
+
+<header>
+  {% load static %}
+  <nav class="navbar navbar-expand-md navbar-light navbar-black ">
+      <div class="container">
+          <a href="" class="navbar-brand">
+              <img src='{% static "img/logo.jpeg"%}' width="50"/>
+          </a>
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal">
+              <i class="fas fa-bars text-white"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="nav-principal">
+              <ul class="navbar-nav ml-auto">
+                  <li class="nav-item ml-4">
+                      <a href="" class="nav-link">SAIBA MAIS</a>
+                  </li>
+                  <li class="nav-item ml-4">
+                      <a href="" class="nav-link">CONTATO</a>
+                  </li>
+                  <li class="nav-item ml-4">
+                      <a href="{% url 'doar_alimento' %}" class="nav-link btn btn-color">QUERO DOAR</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+</header>

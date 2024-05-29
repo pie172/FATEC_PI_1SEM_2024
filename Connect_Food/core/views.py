@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from .services import Doacao
 
-# Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    manager = Doacao()
+    alimentos = manager.listar_alimentos()
+    return render(request, 'index.html', {'alimentos': alimentos})
 
 def doar_alimento(request):
     if request.method == 'POST':
@@ -12,6 +13,9 @@ def doar_alimento(request):
             'cpf': request.POST.get('cpf'),
             'cnpj': request.POST.get('cnpj'),
             'email': request.POST.get('email'),
+            "telefone": request.POST.get('telefone'),
+            "endereco": request.POST.get('endereco'),
+            "horario": request.POST.get('horario'),
             'alimento_id': int(request.POST.get('alimento_id')),
             'categoria': request.POST.get('categoria'),
             'alimento': request.POST.get('alimento'),
@@ -19,7 +23,13 @@ def doar_alimento(request):
             'validade': request.POST.get('validade')
         }
         manager = Doacao()
-        manager.doar_alimento(**dados)
+        result = manager.doar_alimento(**dados)
+        # Verificando se duplicidade no id do alimento, se já estiver no banco dá erro e aperece uma mensagem
+        if 'error' in result:
+            return render(request, 'doar_alimento.html', {'error': result['error']})
+        else:
+            return render(request, 'doar_alimento.html', {'success': 'Doação realizada com sucesso!'})
+
     return render(request, 'doar_alimento.html')
 
 def receber_alimento(request):
@@ -34,6 +44,3 @@ def receber_alimento(request):
         manager = Doacao()
         manager.receber_alimentos(**dados)
     return render(request, 'receber_alimento.html')
-
-def mostrar_alimentos(request):
-    pass
