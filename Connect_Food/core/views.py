@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .services import Doacao
+from django.http import JsonResponse
 
 def index(request):
     manager = Doacao()
@@ -29,7 +30,6 @@ def doar_alimento(request):
             return render(request, 'doar_alimento.html', {'error': result['error']})
         else:
             return render(request, 'doar_alimento.html', {'success': 'Doação realizada com sucesso!'})
-
     return render(request, 'doar_alimento.html')
 
 def receber_alimento(request):
@@ -42,5 +42,9 @@ def receber_alimento(request):
             'email_recebedor': request.POST.get('email_recebedor')
         }
         manager = Doacao()
-        manager.receber_alimentos(**dados)
+        result = manager.receber_alimentos(**dados)
+        if 'error' in result:
+            return render(request, 'receber_alimento.html', {'error': result['error']})
+        else:
+            return render(request, 'receber_alimento.html', {'success': 'Alimento recebido com sucesso!'})
     return render(request, 'receber_alimento.html')

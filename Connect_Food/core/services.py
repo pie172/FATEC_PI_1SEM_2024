@@ -38,16 +38,30 @@ class Doacao():
 
     def receber_alimentos(self, **kwargs):
         filtro = {"alimento_id": kwargs.get('alimento_id')}
+        documento = self.collection.find_one(filtro)
+        
+        if not documento:
+            return {'error': 'Erro Alimento não encontrado'}
+        
+        quant_atualizada = documento['quantidade'] - kwargs.get('quantidade_retirou')
+        if quant_atualizada < 0:
+            return {'error': 'Erro Quantidade retirada maior que a disponível.'}
+        
         atualizacao = {
             "$set": {
                 "nome_recebedor": kwargs.get('nome_recebedor'),
                 "quantidade_retirou": kwargs.get('quantidade_retirou'),
                 "cnpj_recebedor": kwargs.get('cnpj_recebedor'),
-                "email_recebedor": kwargs.get('email_recebedor')
+                "email_recebedor": kwargs.get('email_recebedor'),
+                "quantidade": quant_atualizada
             }
         }
-        result = self.collection.update_one(filtro, atualizacao)
-        return result.modified_count
+        if quant_atualizada == 0:
+            self.collection.delete_one(filtro)
+        else:
+            self.collection.update_one(filtro, atualizacao)
+            
+        return {'modified_count': 1}
 
     def listar_alimentos(self):
         alimentos = self.collection.find({}, {

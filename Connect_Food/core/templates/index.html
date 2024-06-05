@@ -38,9 +38,9 @@
             <div class="work">
                 <img src='{% static "img/doacao.png"%}'/>
                 <p class="work-heading">Doacoes feitas</p>
-
-            <div class="container mt-5">
-                <table class="table">
+                <div class="container mt-5">
+                    <a href="{% url 'receber_alimento' %}" class="btn btn-primary mb-3">Receber Alimento</a>
+                    <table class="table">
                     <thead>
                         <tr>
                             <th>Código do Alimento</th>
@@ -52,13 +52,15 @@
                     </thead>
                     <tbody>
                         {% for alimento in alimentos %}
-                        <tr>
-                            <td>{{ alimento.alimento_id }}</td>
-                            <td>{{ alimento.categoria }}</td>
-                            <td>{{ alimento.alimento }}</td>
-                            <td>{{ alimento.quantidade }}</td>
-                            <td>{{ alimento.validade|date:"d/m/Y" }}</td>
-                        </tr>
+                            {% if alimento.quantidade > 0 %}
+                            <tr>
+                                <td>{{ alimento.alimento_id }}</td>
+                                <td>{{ alimento.categoria }}</td>
+                                <td>{{ alimento.alimento }}</td>
+                                <td>{{ alimento.quantidade }}</td>
+                                <td>{{ alimento.validade|date:"d/m/Y" }}</td>
+                            </tr>
+                            {% endif %}
                         {% endfor %}
                     </tbody>
                 </table>
