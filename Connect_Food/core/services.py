@@ -2,6 +2,7 @@ from pymongo import MongoClient, ASCENDING
 from pymongo.errors import DuplicateKeyError
 from datetime import datetime
 
+
 class Doacao():
     def __init__(self, db_name='connect_food', uri='mongodb://localhost:27017/'):
         self.client = MongoClient(uri)
@@ -23,6 +24,7 @@ class Doacao():
             "categoria": kwargs.get('categoria'),
             "alimento": kwargs.get('alimento'),
             "quantidade": kwargs.get('quantidade'),
+            "quant_medida": kwargs.get('quantidade'),
             "validade": datetime.strptime(kwargs.get('validade'), '%Y-%m-%d') if kwargs.get('validade') else None,
             "nome_recebedor": None,
             "quantidade_retirou": None,
@@ -33,7 +35,7 @@ class Doacao():
             result = self.collection.insert_one(documento)
             return {'inserted_id': str(result.inserted_id)}
         except DuplicateKeyError as e:
-            return {'error': 'Erro: ID do alimento já existe. Por favor, forneça um código único.'}
+            return {'error': 'Erro: Código do alimento já existe. Por favor, forneça um código único.'}
 
 
     def receber_alimentos(self, **kwargs):
@@ -69,6 +71,11 @@ class Doacao():
             "categoria": 1,
             "alimento": 1,
             "quantidade": 1,
+            "quant_medida": 1,
             "validade": 1
         })
         return list(alimentos)
+    
+    def buscar_por_id(self, alimento_id):
+        documento = self.collection.find_one({"alimento_id": alimento_id})
+        return documento if documento else None

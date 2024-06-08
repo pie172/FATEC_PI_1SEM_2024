@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/receber_style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <title>Receber Alimento</title>
 </head>
 <body>
@@ -20,27 +20,49 @@
         <form method="post" class="shadow p-4 bg-light rounded">
             {% csrf_token %}
             <div class="form-group">
-                <label for="alimento_id">ID do Alimento:</label>
+                <label for="alimento_id">Insira o Código do Alimento:</label>
                 <input type="number" class="form-control" id="alimento_id" name="alimento_id" required>
             </div>
-            <div class="form-group">
-                <label for="nome_recebedor">Nome do Recebedor:</label>
-                <input type="text" class="form-control" id="nome_recebedor" name="nome_recebedor" required>
-            </div>
-            <div class="form-group">
-                <label for="quantidade_retirou">Quantidade Retirada:</label>
-                <input type="number" class="form-control" id="quantidade_retirou" name="quantidade_retirou" required>
-            </div>
-            <div class="form-group">
-                <label for="cnpj_recebedor">CNPJ do Recebedor:</label>
-                <input type="text" class="form-control" id="cnpj_recebedor" name="cnpj_recebedor" required>
-            </div>
-            <div class="form-group">
-                <label for="email_recebedor">Email do Recebedor:</label>
-                <input type="email" class="form-control" id="email_recebedor" name="email_recebedor" required>
-            </div>
-            <button type="submit" class="btn btn-primary btn-sm">Receber Alimento</button>
+            <button type="submit" name="buscar" class="btn btn-primary btn-sm">Buscar</button>
         </form>
+
+        {% if doacao %}
+            <h3 class="mt-4">Detalhes da Doação</h3>
+            <ul class="list-group mt-2">
+                <li class="list-group-item">Nome: {{ doacao.nome }}</li>
+                <li class="list-group-item">Email: {{ doacao.email }}</li>
+                <li class="list-group-item">Telefone: {{ doacao.telefone }}</li>
+                <li class="list-group-item">Endereço: {{ doacao.endereco }}</li>
+                <li class="list-group-item">Horário: {{ doacao.horario }}</li>
+                <li class="list-group-item">Categoria: {{ doacao.categoria }}</li>
+                <li class="list-group-item">Alimento: {{ doacao.alimento }}</li>
+                <li class="list-group-item">Quantidade: {{ doacao.quantidade }}</li>
+                <li class="list-group-item">Quantidade Medida: {{ doacao.quant_medida }}</li>
+                <li class="list-group-item">Validade: {{ doacao.validade }}</li>
+            </ul>
+
+            <form method="post" class="mt-4 shadow p-4 bg-light rounded">
+                {% csrf_token %}
+                <input type="hidden" name="alimento_id" value="{{ doacao.alimento_id }}">
+                <div class="form-group">
+                    <label for="nome_recebedor">Nome do Recebedor:</label>
+                    <input type="text" class="form-control" id="nome_recebedor" name="nome_recebedor" required>
+                </div>
+                <div class="form-group">
+                    <label for="quantidade_retirou">Quantidade Retirada:</label>
+                    <input type="number" class="form-control" id="quantidade_retirou" name="quantidade_retirou" required>
+                </div>
+                <div class="form-group">
+                    <label for="cnpj_recebedor">CNPJ do Recebedor:</label>
+                    <input type="text" class="form-control" id="cnpj_recebedor" name="cnpj_recebedor" required>
+                </div>
+                <div class="form-group">
+                    <label for="email_recebedor">Email do Recebedor:</label>
+                    <input type="email" class="form-control" id="email_recebedor" name="email_recebedor" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm">Receber Alimento</button>
+            </form>
+        {% endif %}
     </div>
     {% include 'footer.html' %}
 </body>

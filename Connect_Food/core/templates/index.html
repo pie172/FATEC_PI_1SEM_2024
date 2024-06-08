@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        {% load static %}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/index_style.css' %}">
-        <title> HomePage </title>
-    </head>
-
-    <body>
-        {% include 'header.html' %}
-        <main>
-            <div class="intro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index_style.css' %}">
+    <title> HomePage </title>
+</head>
+<body>
+    {% include 'header.html' %}
+    <main>
+        <div class="intro">
             <h1>CONNECT FOOD</h1>
             <p>Salve um produto e alimente um ser humano.</p>
-            </div>
-            <div class="achievements">
+        </div>
+        <div class="achievements">
             <div class="work col-md-4">
                 <img src='{% static "img/reuso.png"%}'/>
                 <p class="work-heading">Reaproveitamento</p>
@@ -33,38 +32,70 @@
                 <p class="work-heading">Estruturamento</p>
                 <p class="work-text">Auxiliar um problema estrutural e fundamental o ser humano, a fome. Colaboração de insumos a instituições de caridade</p>
             </div>
-            </div>
-            <div class="achievements">
+        </div>
+        <div class="achievements">
             <div class="work">
                 <img src='{% static "img/doacao.png"%}'/>
-                <p class="work-heading">Doacoes feitas</p>
+                <p class="work-heading">Doações feitas</p>
                 <div class="container mt-5">
-                    <a href="{% url 'receber_alimento' %}" class="btn btn-primary mb-3">Receber Alimento</a>
-                    <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Código do Alimento</th>
-                            <th>Categoria</th>
-                            <th>Alimento</th>
-                            <th>Quantidade</th>
-                            <th>Validade</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for alimento in alimentos %}
-                            {% if alimento.quantidade > 0 %}
-                            <tr>
-                                <td>{{ alimento.alimento_id }}</td>
-                                <td>{{ alimento.categoria }}</td>
-                                <td>{{ alimento.alimento }}</td>
-                                <td>{{ alimento.quantidade }}</td>
-                                <td>{{ alimento.validade|date:"d/m/Y" }}</td>
-                            </tr>
-                            {% endif %}
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Código do Alimento</th>
+                                    <th>Categoria</th>
+                                    <th>Alimento</th>
+                                    <th>Quantidade</th>
+                                    <th>Quantidade kg/L</th>
+                                    <th>Validade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for alimento in alimentos %}
+                                    {% if alimento.quantidade > 0 %}
+                                        <tr>
+                                            <td>{{ alimento.alimento_id }}</td>
+                                            <td>{{ alimento.categoria }}</td>
+                                            <td>{{ alimento.alimento }}</td>
+                                            <td>{{ alimento.quantidade }}</td>
+                                            <td>{{ alimento.quant_medida }}</td>
+                                            <td>{{ alimento.validade|date:"d/m/Y" }}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <a href="{% url 'receber_alimento' %}" class="nav-link btn btn-color">Receber Alimento</a>
+                <form method="post" class="form-search">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="alimento_id">Pesquisar Código do Alimento:</label>
+                        <input type="number" class="form-control" id="alimento_id" name="alimento_id" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm">Pesquisar</button>
+                </form>
+
+                {% if doador %}
+                    <div class="donor-info">
+                        <h3>Dados do Doador</h3>
+                        <ul class="list-group mt-2">
+                            <li class="list-group-item">Nome: {{ doador.nome }}</li>
+                            <li class="list-group-item">Email: {{ doador.email }}</li>
+                            <li class="list-group-item">Telefone: {{ doador.telefone }}</li>
+                            <li class="list-group-item">Endereço: {{ doador.endereco }}</li>
+                            <li class="list-group-item">Horário: {{ doador.horario }}</li>
+                            <li class="list-group-item">Categoria: {{ doador.categoria }}</li>
+                            <li class="list-group-item">Alimento: {{ doador.alimento }}</li>
+                            <li class="list-group-item">Quantidade: {{ doador.quantidade }}</li>
+                            <li class="list-group-item">Quantidade Medida: {{ doador.quant_medida }}</li>
+                            <li class="list-group-item">Validade: {{ doador.validade|date:"d/m/Y" }}</li>
+                        </ul>
+                    </div>
+                {% endif %}
+                
+                
             </div>
         </div>
     </main>

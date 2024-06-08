@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 /* Parte do header */
 body {
@@ -62,14 +64,191 @@ body {
 }
 
 .achievements .work .work-heading {
+  font-family: "Lora", serif;
   font-size: 20px;
   color: #333333;
   text-transform: uppercase;
   margin: 10px 0;
 }
 
+
 .achievements .work .work-text {
-  font-size: 15px;
+  font-family: "Abel", sans-serif;
+  font-size: 17.5px;
   color: #585858;
   margin: 10px 0;
+  text-align: center;
 }
+
+.achievements .nav-link {
+  color: white;
+  width: 200px;
+}
+
+.achievements .btn-color {
+  background-color: #275D8C;
+}
+
+
+/* Estilos para a tabela */
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: #fff;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  vertical-align: middle;
+  border-top: 1px solid #dee2e6;
+  text-align: center;
+}
+
+/* Estilo de cabeçalho da tabela */
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+  background-color: #f8f9fa;
+  color: #495057;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Estilo das linhas da tabela */
+.table tbody tr {
+  transition: background-color 0.2s;
+}
+
+.table tbody tr:nth-of-type(odd) {
+  background-color: #f2f2f2;
+}
+
+.table tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+/* Estilo das células da tabela */
+.table tbody td {
+  border-bottom: 1px solid #dee2e6;
+  font-size: 14px;
+  color: #343a40;
+}
+
+/* Estilos adicionais para responsividade */
+@media (max-width: 768px) {
+  .table-responsive {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+  }
+
+  .table-responsive .table {
+      min-width: 600px;
+  }
+}
+
+
+/* Estilo para o formulário de pesquisa */
+.form-search {
+margin: 30px 0;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.form-search .form-group {
+margin-right: 10px;
+}
+
+.form-search input {
+width: 230px;
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 5px;
+}
+
+.form-search button {
+padding: 10px 10px;
+background-color: #275D8C;
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+.form-search button:hover {
+background-color: #1b4163;
+}
+
+/* Estilo para a exibição dos dados do doador */
+.donor-info {
+margin: 20px 0;
+padding: 20px;
+background-color: #f8f9fa;
+border-radius: 5px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.donor-info h3 {
+margin-bottom: 20px;
+font-size: 24px;
+color: #333333;
+font-family: 'Lora', serif;
+}
+
+.donor-info .list-group-item {
+border: none;
+padding: 10px 15px;
+font-size: 16px;
+background-color: transparent;
+color: #333;
+}
+
+.donor-info .list-group-item:not(:last-child) {
+border-bottom: 1px solid #ddd;
+}
+
+/* Estilo adicional para botões */
+.btn-primary {
+background-color: #275D8C;
+border-color: #275D8C;
+transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-primary:hover {
+background-color: #1b4163;
+border-color: #1b4163;
+}
+
+/* Estilos adicionais para responsividade */
+@media (max-width: 768px) {
+.form-search input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.form-search .form-group {
+    width: 100%;
+}
+
+.form-search button {
+    width: 100%;
+}
+
+.donor-info {
+    padding: 15px;
+}
+
+.donor-info h3 {
+    font-size: 20px;
+}
+
+.donor-info .list-group-item {
+    font-size: 14px;
+}
+}
+

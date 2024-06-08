@@ -1,0 +1,23 @@
+/* Adiciona um pouco de margem inferior para os rótulos e campos de entrada */
+form label {
+    margin-top: 10px;
+}
+
+/* Adiciona espaçamento entre os campos do formulário */
+form .form-group {
+    margin-bottom: 15px;
+}
+
+/* Ajusta o botão de envio para ser menor e se destacar mais */
+form button[type="submit"] {
+    margin-top: 20px;
+    font-size: 14px; /* Tamanho de fonte menor */
+    font-weight: bold;
+    padding: 5px 10px; /* Ajusta o padding para um botão menor */
+    width: auto; /* Deixa a largura do botão automática */
+}
+
+/* Adiciona sombra e padding ao formulário para destacá-lo */
+form.shadow {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}

@@ -1,11 +1,17 @@
 from django.shortcuts import render
 from .services import Doacao
-from django.http import JsonResponse
+
 
 def index(request):
     manager = Doacao()
     alimentos = manager.listar_alimentos()
-    return render(request, 'index.html', {'alimentos': alimentos})
+    doador = None
+    
+    if request.method == 'POST':
+        alimento_id = int(request.POST.get('alimento_id'))
+        doador = manager.buscar_por_id(alimento_id)
+    
+    return render(request, 'index.html', {'alimentos': alimentos, 'doador': doador})
 
 def doar_alimento(request):
     if request.method == 'POST':
@@ -21,6 +27,7 @@ def doar_alimento(request):
             'categoria': request.POST.get('categoria'),
             'alimento': request.POST.get('alimento'),
             'quantidade': int(request.POST.get('quantidade')),
+            'quant_medida': request.POST.get('quant_medida'),
             'validade': request.POST.get('validade')
         }
         manager = Doacao()
@@ -33,18 +40,28 @@ def doar_alimento(request):
     return render(request, 'doar_alimento.html')
 
 def receber_alimento(request):
+    manager = Doacao()
+    doacao = None
+    
     if request.method == 'POST':
-        dados = {
-            'alimento_id': int(request.POST.get('alimento_id')),
-            'nome_recebedor': request.POST.get('nome_recebedor'),
-            'quantidade_retirou': int(request.POST.get('quantidade_retirou')),
-            'cnpj_recebedor': request.POST.get('cnpj_recebedor'),
-            'email_recebedor': request.POST.get('email_recebedor')
-        }
-        manager = Doacao()
-        result = manager.receber_alimentos(**dados)
-        if 'error' in result:
-            return render(request, 'receber_alimento.html', {'error': result['error']})
+        # Verificando se estamos buscando por alimento_id ou recebendo o alimento
+        if 'buscar' in request.POST:
+            alimento_id = int(request.POST.get('alimento_id'))
+            doacao = manager.buscar_por_id(alimento_id)
+            if not doacao:
+                return render(request, 'receber_alimento.html', {'error': 'Alimento não encontrado'})
         else:
-            return render(request, 'receber_alimento.html', {'success': 'Alimento recebido com sucesso!'})
-    return render(request, 'receber_alimento.html')
+            dados = {
+                'alimento_id': int(request.POST.get('alimento_id')),
+                'nome_recebedor': request.POST.get('nome_recebedor'),
+                'quantidade_retirou': int(request.POST.get('quantidade_retirou')),
+                'cnpj_recebedor': request.POST.get('cnpj_recebedor'),
+                'email_recebedor': request.POST.get('email_recebedor')
+            }
+            result = manager.receber_alimentos(**dados)
+            if 'error' in result:
+                return render(request, 'receber_alimento.html', {'error': result['error']})
+            else:
+                return render(request, 'receber_alimento.html', {'success': 'Alimento recebido com sucesso!'})
+    
+    return render(request, 'receber_alimento.html', {'doacao': doacao})
