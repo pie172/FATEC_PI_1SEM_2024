@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/receber_style.css' %}">
     <title>Receber Alimento</title>
 </head>
 <body>
@@ -17,50 +17,67 @@
         {% if success %}
             <div class="alert alert-success">{{ success }}</div>
         {% endif %}
-        <form method="post" class="shadow p-4 bg-light rounded">
+
+        <div class="section-title">Informações de Busca</div>
+        <form method="post" class="form-container shadow p-4 bg-light rounded">
             {% csrf_token %}
-            <div class="form-group">
-                <label for="alimento_id">Insira o Código do Alimento:</label>
-                <input type="number" class="form-control" id="alimento_id" name="alimento_id" required>
+            <div class="row">
+                <div class="col-12 form-group">
+                    <label for="alimento_id">Insira o Código do Alimento:</label>
+                    <input type="number" class="form-control" id="alimento_id" name="alimento_id" required>
+                </div>
             </div>
-            <button type="submit" name="buscar" class="btn btn-primary btn-sm">Buscar</button>
+            <div class="text-center mt-4">
+                <button type="submit" name="buscar" class="btn btn-success btn-lg">Buscar</button>
+            </div>
         </form>
 
         {% if doacao %}
-            <h3 class="mt-4">Detalhes da Doação</h3>
-            <ul class="list-group mt-2">
-                <li class="list-group-item">Nome: {{ doacao.nome }}</li>
-                <li class="list-group-item">Email: {{ doacao.email }}</li>
-                <li class="list-group-item">Telefone: {{ doacao.telefone }}</li>
-                <li class="list-group-item">Endereço: {{ doacao.endereco }}</li>
-                <li class="list-group-item">Horário: {{ doacao.horario }}</li>
-                <li class="list-group-item">Categoria: {{ doacao.categoria }}</li>
-                <li class="list-group-item">Alimento: {{ doacao.alimento }}</li>
-                <li class="list-group-item">Quantidade: {{ doacao.quantidade }}</li>
-                <li class="list-group-item">Quantidade Medida: {{ doacao.quant_medida }}</li>
-                <li class="list-group-item">Validade: {{ doacao.validade }}</li>
-            </ul>
+            <hr class="section-divider">
 
-            <form method="post" class="mt-4 shadow p-4 bg-light rounded">
+            <div class="section-title">Detalhes da Doação</div>
+            <div class="donation-details mt-4">
+                <ul class="list-group">
+                    <li class="list-group-item">Nome: {{ doacao.nome }}</li>
+                    <li class="list-group-item">Email: {{ doacao.email }}</li>
+                    <li class="list-group-item">Telefone: {{ doacao.telefone }}</li>
+                    <li class="list-group-item">Endereço: {{ doacao.endereco }}</li>
+                    <li class="list-group-item">Horário: {{ doacao.horario }}</li>
+                    <li class="list-group-item">Categoria: {{ doacao.categoria }}</li>
+                    <li class="list-group-item">Alimento: {{ doacao.alimento }}</li>
+                    <li class="list-group-item">Quantidade: {{ doacao.quantidade }}</li>
+                    <li class="list-group-item">Quantidade Medida: {{ doacao.quant_medida }}</li>
+                    <li class="list-group-item">Validade: {{ doacao.validade }}</li>
+                </ul>
+            </div>
+
+            <hr class="section-divider">
+
+            <div class="section-title">Informações do Recebedor</div>
+            <form method="post" class="form-container shadow p-4 bg-light rounded mt-4">
                 {% csrf_token %}
                 <input type="hidden" name="alimento_id" value="{{ doacao.alimento_id }}">
-                <div class="form-group">
-                    <label for="nome_recebedor">Nome do Recebedor:</label>
-                    <input type="text" class="form-control" id="nome_recebedor" name="nome_recebedor" required>
+                <div class="row">
+                    <div class="col-12 form-group">
+                        <label for="nome_recebedor">Nome do Recebedor:</label>
+                        <input type="text" class="form-control" id="nome_recebedor" name="nome_recebedor" value="{{ data.nome_recebedor|default_if_none:'' }}" required>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label for="quantidade_retirou">Quantidade Retirada:</label>
+                        <input type="number" class="form-control" id="quantidade_retirou" name="quantidade_retirou" value="{{ data.quantidade_retirou|default_if_none:'' }}" required>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label for="cnpj_recebedor">CNPJ do Recebedor:</label>
+                        <input type="text" class="form-control" id="cnpj_recebedor" name="cnpj_recebedor" value="{{ data.cnpj_recebedor|default_if_none:'' }}">
+                    </div>
+                    <div class="col-12 form-group">
+                        <label for="email_recebedor">Email do Recebedor:</label>
+                        <input type="email" class="form-control" id="email_recebedor" name="email_recebedor" value="{{ data.email_recebedor|default_if_none:'' }}" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="quantidade_retirou">Quantidade Retirada:</label>
-                    <input type="number" class="form-control" id="quantidade_retirou" name="quantidade_retirou" required>
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-success btn-lg">Receber Alimento</button>
                 </div>
-                <div class="form-group">
-                    <label for="cnpj_recebedor">CNPJ do Recebedor:</label>
-                    <input type="text" class="form-control" id="cnpj_recebedor" name="cnpj_recebedor" required>
-                </div>
-                <div class="form-group">
-                    <label for="email_recebedor">Email do Recebedor:</label>
-                    <input type="email" class="form-control" id="email_recebedor" name="email_recebedor" required>
-                </div>
-                <button type="submit" class="btn btn-primary btn-sm">Receber Alimento</button>
             </form>
         {% endif %}
     </div>

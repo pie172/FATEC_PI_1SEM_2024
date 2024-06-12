@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .services import Doacao
+import re
 
 
 def index(request):
@@ -30,13 +31,33 @@ def doar_alimento(request):
             'quant_medida': request.POST.get('quant_medida'),
             'validade': request.POST.get('validade')
         }
+        
+        # Validações
+        erros = []
+
+        # Validação de CPF (11 dígitos numéricos)
+        if dados['cpf'] and not re.match(r'^\d{11}$', dados['cpf']):
+            erros.append('CPF deve ter 11 dígitos numéricos.')
+        
+        # Validação de CNPJ (14 dígitos numéricos)
+        if dados['cnpj'] and not re.match(r'^\d{14}$', dados['cnpj']):
+            erros.append('CNPJ deve ter 14 dígitos numéricos.')
+
+        # Validação de telefone (aceitando formatos diferentes, mas apenas números)
+        if not re.match(r'^\(?\d{2}\)?\d{4,5}-?\d{4}$', dados['telefone']):
+            erros.append('Telefone deve ter o formato correto (ex: (11) 99999-9999 ou 11999999999).')
+
+        # Se houver erros, renderiza o template com os erros e os dados preenchidos
+        if erros:
+            return render(request, 'doar_alimento.html', {'error': ' '.join(erros), 'data': dados})
+        
         manager = Doacao()
         result = manager.doar_alimento(**dados)
         # Verificando se duplicidade no id do alimento, se já estiver no banco dá erro e aperece uma mensagem
         if 'error' in result:
-            return render(request, 'doar_alimento.html', {'error': result['error']})
+            return render(request, 'doar_alimento.html', {'error': result['error'], 'data': dados})
         else:
-            return render(request, 'doar_alimento.html', {'success': 'Doação realizada com sucesso!'})
+            return render(request, 'doar_alimento.html', {'success': 'Doação realizada com sucesso!', 'data': {}})
     return render(request, 'doar_alimento.html')
 
 def receber_alimento(request):
@@ -58,10 +79,19 @@ def receber_alimento(request):
                 'cnpj_recebedor': request.POST.get('cnpj_recebedor'),
                 'email_recebedor': request.POST.get('email_recebedor')
             }
+            
+            erros = []
+            
+            # Validação de CNPJ (14 dígitos numéricos)
+            if dados['cnpj_recebedor'] and not re.match(r'^\d{14}$', dados['cnpj_recebedor']):
+                erros.append('CNPJ deve ter 14 dígitos numéricos.')
+            if erros:
+                return render(request, 'receber_alimento.html', {'error': ' '.join(erros), 'data': dados})
+                
             result = manager.receber_alimentos(**dados)
             if 'error' in result:
-                return render(request, 'receber_alimento.html', {'error': result['error']})
+                return render(request, 'receber_alimento.html', {'error': result['error'], 'data': dados})
             else:
-                return render(request, 'receber_alimento.html', {'success': 'Alimento recebido com sucesso!'})
+                return render(request, 'receber_alimento.html', {'success': 'Alimento recebido com sucesso!', 'data': {}})
     
     return render(request, 'receber_alimento.html', {'doacao': doacao})
