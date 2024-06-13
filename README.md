@@ -47,17 +47,17 @@ Para executar o projeto, siga os seguintes comandos:
   ```
 ### Iniciar Script
 
-  ```sh
-  cd Connect_Food
-  ```
-
-  ```sh
-  python manage.py tests
-  ```
+    ```sh
+        cd Connect_Food
+    ```
 
     ```sh
-  python manage.py runserver
-  ```
+        python manage.py tests
+    ```
+
+    ```sh
+        python manage.py runserver
+    ```
 
 <table>
   <tr>
