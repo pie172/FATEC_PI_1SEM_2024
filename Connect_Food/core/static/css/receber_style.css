@@ -2,6 +2,7 @@
 
 body {
     font-family: 'Lora', serif;
+    background: #f4a764;
 }
 
 h3, .section-title {
@@ -64,6 +65,7 @@ h3, .section-title {
 
 /* Ajustes para os botões */
 .btn {
+    font-weight: bold;
     font-size: 16px;
     padding: 10px 20px;
 }

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>Resultados Agregados</title>
+</head>
+<body class="body-resultados-agregados">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Resultados Agregados</h1>
+        
+        <!-- Total de Alimentos por Categoria -->
+        <div class="table-responsive mb-5">
+            <h2>Total de Alimentos por Categoria</h2>
+            <table class="table table-striped table-bordered table-resultados">
+                <thead>
+                    <tr>
+                        <th>Categoria</th>
+                        <th>Total de Alimentos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in total_alimentos_por_categoria %}
+                    <tr>
+                        <td>{{ item.categoria }}</td>
+                        <td>{{ item.total_alimentos }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Doadores com Maior Quantidade de Doações -->
+        <div class="table-responsive mb-5">
+            <h2>Doadores com Maior Quantidade de Doações</h2>
+            <table class="table table-striped table-bordered table-resultados">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Total Doado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in doadores_mais_doaram %}
+                    <tr>
+                        <td>{{ item.nome }}</td>
+                        <td>{{ item.total_doado }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Alimentos Próximos da Validade -->
+        <div class="table-responsive mb-5">
+            <h2>Alimentos Próximos da Validade</h2>
+            <table class="table table-striped table-bordered table-resultados">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Categoria</th>
+                        <th>Data de Validade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in alimentos_proximos_validade %}
+                    <tr>
+                        <td>{{ item.alimento }}</td>
+                        <td>{{ item.categoria }}</td>
+                        <td>{{ item.validade|date:"d/m/Y" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Quantidade Total de Alimentos Disponíveis -->
+        <div class="total-alimentos mb-5">
+            <h2>Quantidade Total de Alimentos Disponíveis</h2>
+            <p>Total de Alimentos Disponíveis: <strong>{{ quantidade_total_alimentos.0.quantidade_total }}</strong></p>
+        </div>
+        
+        <!-- Histórico de Retiradas por Receptor -->
+        <div class="table-responsive mb-5">
+            <h2>Histórico de Retiradas por Receptor</h2>
+            <table class="table table-striped table-bordered table-resultados">
+                <thead>
+                    <tr>
+                        <th>Receptor</th>
+                        <th>Total Retirado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in historico_retiradas_receptor %}
+                    <tr>
+                        <td>{{ item.nome_recebedor }}</td>
+                        <td>{{ item.total_retirado }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'index' %}" class="btn btn-success btn-voltar">Voltar ao Início</a>
+    </div>
+</body>
+</html>

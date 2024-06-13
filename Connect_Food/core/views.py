@@ -53,7 +53,7 @@ def doar_alimento(request):
             if validade < datetime.now():
                 erros.append('Data de validade deve ser no mínimo a data atual.')
         except ValueError:
-            erros.append('Data de validade deve estar no formato YYYY-MM-DD.')
+            erros.append('Data de validade deve estar no formato DD-MM-YYYY.')
 
         # Se houver erros, renderiza o template com os erros e os dados preenchidos
         if erros:
@@ -103,3 +103,84 @@ def receber_alimento(request):
                 return render(request, 'receber_alimento.html', {'success': 'Alimento recebido com sucesso!', 'data': {}})
     
     return render(request, 'receber_alimento.html', {'doacao': doacao})
+
+
+def saiba_mais(request):
+    return render(request, 'saiba_mais.html')
+
+#framework de aggregation
+
+def resultados_agregados(request):
+    manager = Doacao()
+    
+    # Consulta 1: Total de Alimentos por Categoria
+    pipeline_categoria = [
+        {"$group": {
+            "_id": "$categoria",
+            "total_alimentos": {"$sum": "$quantidade"}
+        }},
+        {"$sort": {"total_alimentos": -1}}
+    ]
+    total_alimentos_por_categoria = manager.executar_agregacao(pipeline_categoria)
+    # Renomeando chave _id para categoria
+    for item in total_alimentos_por_categoria:
+        item['categoria'] = item.pop('_id')
+    
+    # Consulta 2: Doadores com Maior Quantidade de Doações
+    pipeline_doadores = [
+        {"$group": {
+            "_id": "$nome",
+            "total_doado": {"$sum": "$quantidade"}
+        }},
+        {"$sort": {"total_doado": -1}},
+        {"$limit": 5}
+    ]
+    doadores_mais_doaram = manager.executar_agregacao(pipeline_doadores)
+    # Renomeando chave _id para nome
+    for item in doadores_mais_doaram:
+        item['nome'] = item.pop('_id')
+    
+    # Consulta 3: Alimentos Próximos da Validade
+    pipeline_validade = [
+        {"$match": {
+            "validade": {"$gte": datetime.now()}
+        }},
+        {"$sort": {"validade": 1}},
+        {"$limit": 10}
+    ]
+    alimentos_proximos_validade = manager.executar_agregacao(pipeline_validade)
+    
+    # Consulta 4: Quantidade Total de Alimentos Disponíveis
+    pipeline_quantidade_total = [
+        {"$group": {
+            "_id": None,
+            "quantidade_total": {"$sum": "$quantidade"}
+        }}
+    ]
+    quantidade_total_alimentos = manager.executar_agregacao(pipeline_quantidade_total)
+    
+    # Consulta 5: Histórico de Retiradas por Receptor
+    pipeline_retiradas = [
+        {"$match": {
+            "nome_recebedor": {"$ne": None}
+        }},
+        {"$group": {
+            "_id": "$nome_recebedor",
+            "total_retirado": {"$sum": "$quantidade_retirou"}
+        }},
+        {"$sort": {"total_retirado": -1}}
+    ]
+    historico_retiradas_receptor = manager.executar_agregacao(pipeline_retiradas)
+    # Renomeando chave _id para nome_recebedor
+    for item in historico_retiradas_receptor:
+        item['nome_recebedor'] = item.pop('_id')
+    
+    contexto = {
+        'total_alimentos_por_categoria': total_alimentos_por_categoria,
+        'doadores_mais_doaram': doadores_mais_doaram,
+        'alimentos_proximos_validade': alimentos_proximos_validade,
+        'quantidade_total_alimentos': quantidade_total_alimentos,
+        'historico_retiradas_receptor': historico_retiradas_receptor
+    }
+    
+    return render(request, 'relatorio.html', contexto)

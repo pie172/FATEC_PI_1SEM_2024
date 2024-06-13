@@ -2,6 +2,7 @@
 
 body {
     font-family: 'Lora', serif;
+    background: #f4a764;
 }
 
 h1, h3 {
@@ -50,13 +51,14 @@ h1, h3 {
 
 /* Ajustes para os botões */
 .btn {
+    font-weight: bold;
     font-size: 16px;
     padding: 10px 20px;
 }
 
 .btn-success {
-    background-color: #8ACB88; /* Cor verde similar à imagem */
-    border-color: #8ACB88;
+    background-color: #8bc864; /* Cor verde similar à imagem */
+    border-color: #8bc864;
     transition: background-color 0.3s, border-color 0.3s;
 }
 

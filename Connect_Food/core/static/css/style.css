@@ -1,23 +1,81 @@
-/* Adiciona um pouco de margem inferior para os rótulos e campos de entrada */
-form label {
-    margin-top: 10px;
+@import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/* resultados_agregados.css */
+
+/* Classe para a página de resultados agregados */
+.body-resultados-agregados {
+    background: #ffffff;
+    font-family: 'Abel', sans-serif;
+    padding: 20px;
 }
 
-/* Adiciona espaçamento entre os campos do formulário */
-form .form-group {
-    margin-bottom: 15px;
+.table-resultados {
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: #fff;
+    border-collapse: collapse;
 }
 
-/* Ajusta o botão de envio para ser menor e se destacar mais */
-form button[type="submit"] {
-    margin-top: 20px;
-    font-size: 14px; /* Tamanho de fonte menor */
+.table-resultados th,
+.table-resultados td {
+    padding: 12px;
+    vertical-align: middle;
+    border-top: 1px solid #dee2e6;
+    text-align: center;
+}
+
+.table-resultados thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    background-color: #f8f9fa;
+    color: #495057;
     font-weight: bold;
-    padding: 5px 10px; /* Ajusta o padding para um botão menor */
-    width: auto; /* Deixa a largura do botão automática */
+    font-size: 16px;
 }
 
-/* Adiciona sombra e padding ao formulário para destacá-lo */
-form.shadow {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+.table-resultados tbody tr {
+    transition: background-color 0.2s;
+}
+
+.table-resultados tbody tr:nth-of-type(odd) {
+    background-color: #f2f2f2;
+}
+
+.table-resultados tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+.table-resultados tbody td {
+    border-bottom: 1px solid #dee2e6;
+    font-size: 14px;
+    color: #343a40;
+}
+
+/* Estilo para os gráficos */
+.chart-container {
+    width: 100%;
+    height: 400px;
+    margin: 20px 0;
+}
+
+.chart {
+    width: 100%;
+    height: 100%;
+}
+
+/* Estilo para o botão de voltar */
+.btn-voltar {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-voltar:hover {
+    background-color: #218838;
 }

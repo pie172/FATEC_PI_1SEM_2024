@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saiba Mais | Connect Food</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/saiba_mais.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body class="body-saiba-mais">
+    <div class="container-saiba-mais">
+        <h1 class="titulo">Bem-vindo à Connect Food</h1>
+        <p class="texto">
+            Bem-vindo à nossa plataforma de sustentabilidade, um projeto inovador com a missão de conectar doadores de alimentos com aqueles que mais necessitam. Nossa plataforma visa proporcionar uma distribuição eficiente e ágil de alimentos, reduzindo o desperdício e combatendo a fome.
+        </p>
+
+        <h2 class="subtitulo">Como Funciona</h2>
+        <p class="texto">
+            Nossa plataforma é simples e intuitiva. Doadores podem cadastrar os alimentos que desejam doar, informando a quantidade, tipo e validade dos produtos. Isso permite que as doações sejam claras e organizadas, facilitando a distribuição dos alimentos. Instituições e indivíduos que necessitam de alimentos também podem se cadastrar na plataforma, indicando suas necessidades e preferências, garantindo que recebam exatamente o que precisam.
+        </p>
+
+        <p class="texto">
+            Agimos como um intermediário, simplificando o processo de doação e evitando que alimentos sejam desperdiçados. Nossa plataforma garante que os alimentos cheguem rapidamente às pessoas certas, ajudando a reduzir a fome e a desnutrição.
+        </p>
+
+        <p class="texto">
+            Estamos comprometidos com a promoção da sustentabilidade e a conscientização sobre a importância de reduzir o desperdício de alimentos. Acreditamos que, juntos, podemos contribuir para a alimentação de instituições de caridade e pessoas em situações de vulnerabilidade, criando um mundo mais justo e equilibrado onde a fome e a desnutrição sejam eliminadas.
+        </p>
+
+        <p class="texto">
+            Se você deseja fazer a diferença, junte-se a nós! Seja como doador ou beneficiário, sua participação é fundamental para o sucesso desta iniciativa. Vamos trabalhar juntos para construir um futuro onde todos tenham acesso aos alimentos de que precisam, sem desperdícios e com total transparência.
+        </p>
+
+        <!-- Botão para voltar ao início -->
+        <div class="text-center mt-4">
+            <a href="{% url 'index' %}" class="btn btn-success btn-voltar">Voltar ao Início</a>
+        </div>
+    </div>
+</body>
+</html>

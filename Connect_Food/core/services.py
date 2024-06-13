@@ -79,3 +79,7 @@ class Doacao():
     def buscar_por_id(self, alimento_id):
         documento = self.collection.find_one({"alimento_id": alimento_id})
         return documento if documento else None
+
+    #framework de aggregation
+    def executar_agregacao(self, pipeline):
+        return list(self.collection.aggregate(pipeline))
