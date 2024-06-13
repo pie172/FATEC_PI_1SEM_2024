@@ -54,7 +54,7 @@ Para executar o projeto, siga os seguintes comandos:
  ```
  * Faço o teste
  ```sh
-    python manage.py tests
+    python manage.py test
  ```
  * Inicia o projeto
  ```sh
