@@ -45,23 +45,21 @@ Para executar o projeto, siga os seguintes comandos:
   ```sh
     pip install -r requirements.txt
   ```
+
 ### Iniciar Script
 
-    * Entre no projeto
-
-    ```sh
-        cd Connect_Food
-    ```
-    * Faço o teste
-
-    ```sh
-        python manage.py tests
-    ```
-    * Inicia o projeto
-
-    ```sh
-        python manage.py runserver
-    ```
+ * Entre no projeto
+ ```sh
+    cd Connect_Food
+ ```
+ * Faço o teste
+ ```sh
+    python manage.py tests
+ ```
+ * Inicia o projeto
+ ```sh
+    python manage.py runserver
+ ```
 
 ### Integrantes
 <table align="center">
