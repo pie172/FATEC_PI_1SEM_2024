@@ -47,19 +47,24 @@ Para executar o projeto, siga os seguintes comandos:
   ```
 ### Iniciar Script
 
+    * Entre no projeto
+
     ```sh
         cd Connect_Food
     ```
+    * Faço o teste
 
     ```sh
         python manage.py tests
     ```
+    * Inicia o projeto
 
     ```sh
         python manage.py runserver
     ```
 
-<table>
+### Integrantes
+<table align="center">
   <tr>
     <td align="center"><a href="https://github.com/miguelfernandeses"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/128096236?v=4" width="100px;" alt=""/><br /><sub><b>Miguel Fernandes</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/pie172"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/103082349?v=4" width="100px;" alt=""/><br /><sub><b>Pietra Alves (PO) </b></sub></a><br /></td>
