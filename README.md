@@ -64,10 +64,10 @@ Para executar o projeto, siga os seguintes comandos:
 ### Integrantes
 <table align="center">
   <tr>
-    <td align="center"><a href="https://github.com/miguelfernandeses" style="text-decoration:none"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/128096236?v=4" width="100px;" alt=""/><br /><sub><b>Miguel Fernandes</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/pie172" style="text-decoration:none"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/103082349?v=4" width="100px;" alt=""/><br /><sub><b>Pietra Alves (PO) </b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/Rafaelajbsantos" style="text-decoration:none"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/130415241?v=4" width="100px;" alt=""/><br /><sub><b>Rafaela de Jesus</b></sub></a><br /></td>  
-    <td align="center"><a href="https://github.com/RobertoGuedesdeAlmeidaJunior" style="text-decoration:none"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/125707714?v=4" width="100px;" alt=""/><br /><sub><b>Roberto Guedes</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/rubinhortega" style="text-decoration:none"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/91102160?v=4" width="100px;" alt=""/><br /><sub><b>Rubens Ortega</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/miguelfernandeses" ><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/128096236?v=4" width="100px;" alt=""/><br /><sub><b>Miguel Fernandes</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/pie172"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/103082349?v=4" width="100px;" alt=""/><br /><sub><b>Pietra Alves (PO) </b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Rafaelajbsantos"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/130415241?v=4" width="100px;" alt=""/><br /><sub><b>Rafaela de Jesus</b></sub></a><br /></td>  
+    <td align="center"><a href="https://github.com/RobertoGuedesdeAlmeidaJunior"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/125707714?v=4" width="100px;" alt=""/><br /><sub><b>Roberto Guedes</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/rubinhortega"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/91102160?v=4" width="100px;" alt=""/><br /><sub><b>Rubens Ortega</b></sub></a><br /></td>
   </tr>
 </table>
