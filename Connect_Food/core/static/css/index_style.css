@@ -136,19 +136,61 @@ body {
   color: #343a40;
 }
 
-/* Estilos adicionais para responsividade */
-@media (max-width: 768px) {
-  .table-responsive {
-      display: block;
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-  }
-
-  .table-responsive .table {
-      min-width: 600px;
-  }
+.table-container {
+  max-height: 400px; 
+  overflow-y: auto; 
+  margin-bottom: 20px; 
 }
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse; 
+}
+
+.table-container th, .table-container td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #dee2e6; 
+}
+
+.table-container {
+  max-height: 400px; 
+  overflow-y: auto; 
+  margin-bottom: 20px;
+  position: relative; 
+}
+
+.fixed-header thead {
+  position: sticky; 
+  top: 0; 
+  z-index: 100; 
+  background-color: #f8f9fa; 
+}
+
+.fixed-header th {
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 12px;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.fixed-header tbody tr:nth-of-type(odd) {
+  background-color: #f2f2f2;
+}
+
+.fixed-header tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+.fixed-header tbody td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #dee2e6;
+  font-size: 14px;
+  color: #343a40;
+}
+
 
 
 /* Estilo para o formulário de pesquisa */

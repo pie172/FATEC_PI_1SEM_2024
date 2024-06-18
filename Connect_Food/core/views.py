@@ -168,7 +168,8 @@ def resultados_agregados(request):
             "_id": "$nome_recebedor",
             "total_retirado": {"$sum": "$quantidade_retirou"}
         }},
-        {"$sort": {"total_retirado": -1}}
+        {"$sort": {"total_retirado": -1}},
+        {"$limit": 20}
     ]
     historico_retiradas_receptor = manager.executar_agregacao(pipeline_retiradas)
     # Renomeando chave _id para nome_recebedor
